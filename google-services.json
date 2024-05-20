@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834076095082",
+    "project_id": "football-connect-4",
+    "storage_bucket": "football-connect-4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834076095082:android:a1c50ca3e0ad1671f8d013",
+        "android_client_info": {
+          "package_name": "com.footballtelly.footballconnect4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyV7HKOuq6wtwft8hXGSOUjrdeH-c5El8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
