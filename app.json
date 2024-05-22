@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.patisocialnet.footballconnect4"
+      "package": "com.patisocialnet.footballconnect4",
+      "enableDangerousExperimentalLeanBuilds": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -41,5 +42,6 @@
         "projectId": "b84af682-d2b2-439d-b381-1b5c24fd2533"
       }
     }
+    
   }
 }

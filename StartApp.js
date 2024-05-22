@@ -8,8 +8,16 @@ import RouterComponent from "./Router"
 import reducers from './src/reducers'
 import { fetchGameItems, fetchItems, getCities } from './src/actions/GameActions';
 import { applyMiddleware, createStore } from 'redux';
+import { Audio } from 'expo-av';
 const thunkMiddleware = require("redux-thunk").thunk;
 import { db } from './firebaseConfig';
+
+const audioFiles = {
+
+  intro:require("./assets/sounds/intro.mp3"),
+
+};
+
 
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
@@ -49,12 +57,21 @@ export default function StartApp() {
   }, [gameState]);
 
 
+const playSound = async() =>{
 
+  const newSound = await Audio.Sound.createAsync(audioFiles.intro, { shouldPlay: true });
+  
+  await newSound.playAsync(); 
+
+
+}
 
 
 
 
   if (state.items.length === 0) {
+
+    playSound();
 
     return (
       <View style={styles.gifContainer}>

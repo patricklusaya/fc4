@@ -42,6 +42,9 @@ const tableHeight = height/2;
 const cellHeight = tableHeight/7
 const audioFiles = {
   enter:require("../../../assets/sounds/enter.mp3"),
+  start:require("../../../assets/sounds/start.mp3"),
+  restart:require("../../../assets/sounds/restart.mp3"),
+  select:require("../../../assets/sounds/select.mp3"),
 };
 
 
@@ -69,24 +72,7 @@ const [state, setState] = useState({
 
 
 
-async function playSound() {
-  console.log('Loading Sound');
-  const { sound } = await Audio.Sound.createAsync( require('./../../../assets/sounds/enter.mp3')
-  );
-  setSound(sound);
 
-  console.log('Playing Sound');
-  await sound.playAsync();
-}
-
-useEffect(() => {
-  return sound
-    ? () => {
-        console.log('Unloading Sound');
-        sound.unloadAsync();
-      }
-    : undefined;
-}, [sound]);
 
 
 const gameState = useSelector((state) => state.game);
@@ -220,12 +206,8 @@ const opacityPlayerTwo = useRef(new Animated.Value(1)).current;
     if (Object.keys(selectedCells).length > 0 ) {
       return (
         <View style={styles.startOverButtonStyles} >
-        {/* <TouchableOpacity style={styles.startButton} onPress={onStartOverGame}>
+        <TouchableOpacity style={styles.startButton} onPress={onStartOverGame}>
           <Text style={styles.barText}>Start Over</Text>
-        </TouchableOpacity> */}
-
-        <TouchableOpacity style={styles.startButton} onPress={playSound}>
-          <Text style={styles.barText}>Play</Text>
         </TouchableOpacity>
         </View>
       );
@@ -281,7 +263,9 @@ const handleItemSelection =  async(rowIndex, colIndex) => {
     // If the cell was already selected, deselect it
     const { [`${rowIndex}-${colIndex}`]: _, ...updatedSelectedCells } = selectedCells;
     setSelectedCells(updatedSelectedCells);
-    playSound()
+    const newSound = await Audio.Sound.createAsync(audioFiles.select, { shouldPlay: true });
+    await newSound.playAsync(); 
+   
   } else {
     // If the cell was not selected, select it with the current player
     setSelectedCells({ ...selectedCells, [`${rowIndex}-${colIndex}`]: currentPlayer });
@@ -296,8 +280,9 @@ const handleItemSelection =  async(rowIndex, colIndex) => {
       setIsPlayerOneActive(true);
       setIsPlayerTwoActive(false);
     }
-
-    playSound()
+    const newSound = await Audio.Sound.createAsync(audioFiles.select, { shouldPlay: true });
+    await newSound.playAsync(); 
+    
      
   }
 };
@@ -351,12 +336,16 @@ const renderRow = (playerTwo, rowIndex, imageSource) => (
         activeOpacity={0.6}>
         <View style={styles.roundCells}>
           {/* Conditionally render the image based on selection */}
-          {selectedCells[`${rowIndex}-${colIndex}`] === 'playerOne' && (
-            <Image source={kit1} style={{ width: 20, height: 20 }} />
-          )}
-           {selectedCells[`${rowIndex}-${colIndex}`] === 'playerTwo' && (
-            <Image source={kit2} style={{ width: 20, height: 20 }} />
-          )}
+          {selectedCells[`${rowIndex}-${colIndex}`] === 'playerOne'
+          //  && (
+          //   <Image source={kit1} style={{ width: 20, height: 20 }} />
+          // )
+          }
+           {selectedCells[`${rowIndex}-${colIndex}`] === 'playerTwo'
+          //   && (
+          //   <Image source={kit2} style={{ width: 20, height: 20 }} />
+          // )
+          }
         </View>
       </TouchableHighlight>
     ))}
@@ -384,18 +373,19 @@ const renderGameBoard = () => {
 const onStartGame= async() => {
 
   setState({...state, hasGameStarted:true})
-  const newSound = await Audio.Sound.createAsync(audioFiles.enter, { shouldPlay: true });
-  
+  const newSound = await Audio.Sound.createAsync(audioFiles.start, { shouldPlay: true });
   await newSound.playAsync(); 
 }
 
-const onStartOverGame= async() => {
+const onStartOverGame = async() => {
+   
 
   setState({...state, hasGameStarted:true})
   setSelectedCells([])
-  const newSound = await Audio.Sound.createAsync(audioFiles.enter, { shouldPlay: true });
+  const newSound = await Audio.Sound.createAsync(audioFiles.restart, { shouldPlay: true });
   
-  await newSound.playAsync(); 
+  await newSound.playAsync();
+  
 }
 
 

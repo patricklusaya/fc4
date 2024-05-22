@@ -5,7 +5,7 @@ import { Audio } from 'expo-av';
 
 const { width, height } = Dimensions.get('window');
 const audioFiles = {
-  enter:require("../../../../assets/sounds/enter.mp3"),
+  select:require("../../../../assets/sounds/select.mp3"),
 };
 
 export default function PlayerTwoModal({ isVisible, onClose, onOptionSelect, modalOptions }) {
@@ -14,7 +14,7 @@ export default function PlayerTwoModal({ isVisible, onClose, onOptionSelect, mod
 
   const onCloseModal = (selectedItems) => {
 
-    if (selectedItems.length < 1) {
+    if (selectedItems.length < 6) {
         return alert("You must select 6 items")
       } else {
         onClose(selectedItems)
@@ -39,10 +39,10 @@ export default function PlayerTwoModal({ isVisible, onClose, onOptionSelect, mod
     console.log('selected', updatedSelectedItems)
       
     } else{
-     alert("You can only do 6 selections")
+     alert("You are limited to 6 selections")
     }
 
-    const newSound = await Audio.Sound.createAsync(audioFiles.enter, { shouldPlay: true });
+    const newSound = await Audio.Sound.createAsync(audioFiles.select, { shouldPlay: true });
   
     await newSound.playAsync();
     

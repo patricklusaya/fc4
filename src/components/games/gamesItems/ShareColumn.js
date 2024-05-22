@@ -7,10 +7,10 @@ const ShareColumn = ({ icon, name, imageSource,  }) => {
  
     const handleSharing= () => {
   
-    const message = "Play football connect 4 by downloading our app "
+    const message = "Experience the thrill of football Connect 4! Download our app now and start playing "
     
   
-        Share.share( {  message, url: "https://apkfrees/download",title: "FC4", },
+        Share.share( {  message, url: "",title: "Download Football Connect 4", },
         {
             subject: "FC4",
         });      

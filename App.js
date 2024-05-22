@@ -14,7 +14,7 @@ const thunkMiddleware = require("redux-thunk").thunk;
 import StartApp from './StartApp';
 
 const audioFiles = {
-  start:require("./assets/sounds/start.mp3"),
+  intro:require("./assets/sounds/intro.mp3"),
 };
 
 
@@ -26,7 +26,7 @@ export default function App() {
   
   const playAudio = async()=>{
 
-    const newSound = await Audio.Sound.createAsync(audioFiles.start, { shouldPlay: true });
+    const newSound = await Audio.Sound.createAsync(audioFiles.intro, { shouldPlay: true });
   
    await newSound.playAsync(); 
 
@@ -36,6 +36,9 @@ export default function App() {
   
 
   useEffect(() => {
+
+   
+
     async function prepare() {
       try {
         await Font.loadAsync({

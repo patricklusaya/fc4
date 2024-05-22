@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 
 const audioFiles = {
   enter:require("../../../../assets/sounds/enter.mp3"),
-  dramatic:require("../../../../assets/sounds/dramatic.mp3")
+ 
 };
 
 const GameColumn = ({  imageSource,name, route }) => {
