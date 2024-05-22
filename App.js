@@ -13,9 +13,6 @@ import { applyMiddleware, createStore } from 'redux';
 const thunkMiddleware = require("redux-thunk").thunk;
 import StartApp from './StartApp';
 
-const audioFiles = {
-  intro:require("./assets/sounds/intro.mp3"),
-};
 
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
@@ -23,17 +20,8 @@ const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
-  
-  const playAudio = async()=>{
-
-    const newSound = await Audio.Sound.createAsync(audioFiles.intro, { shouldPlay: true });
-  
-   await newSound.playAsync(); 
 
 
-  }
-
-  
 
   useEffect(() => {
 
